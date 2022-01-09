@@ -23,16 +23,29 @@ class MainClass{
       int res = int.Parse(Console.ReadLine());
       switch(res) {
         case 1:
+          Console.Clear();
           Console.WriteLine("Pokemons Cadastrados:");
           foreach(Pokemon pokemon in pokemons) {
             Console.WriteLine(pokemon);
           }
+
+          Console.Write("\nPressione ENTER para voltar ao menu");
+          Console.ReadLine();
+          Console.Clear();
           break;
         case 2: 
           Console.WriteLine("Tipo");
+
+          Console.Write("\nPressione ENTER para voltar ao menu");
+          Console.ReadLine();
+          Console.Clear();
           break;
         case 3:
           Console.WriteLine("Pokemon");
+
+          Console.Write("\nPressione ENTER para voltar ao menu");
+          Console.ReadLine();
+          Console.Clear();
           break;
         case 4:
           loop = false;
