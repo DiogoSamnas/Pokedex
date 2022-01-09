@@ -2,43 +2,40 @@ using System;
 
 class MainClass{
   public static void Main(){
-    bool loop = true;
-    Type grass = new Type(2,"Grass");
-
-    Pokemon poke1 = new Pokemon(1,"Bulbasaur", 0.7, 6.9, 45, 49, 49, 65, 65, 45, grass);
-    Pokemon poke2 = new Pokemon(2,"Ivysaur", 1.0, 13.0, 60, 62, 63, 80, 80, 60, grass);
-
-    grass.PokemonInserir(poke1);
-    grass.PokemonInserir(poke2);
-
-    Pokemon[] v = grass.PokemonListar();
-    Console.WriteLine("Pokemons tipo: " + grass.GetDescricao());
-    foreach(Pokemon p in v) Console.WriteLine(p);
-    Console.WriteLine();
-
-
-    while(loop) {
-      Console.WriteLine("1 - Cadastrar Tipo");
-      Console.WriteLine("2 - Cadastrar Pokemon");
-      Console.WriteLine("3 - Sair");
-
-      int res = int.Parse(Console.ReadLine());
-      switch(res) {
-        case 1: 
-          Console.WriteLine("Tipo");
-          break;
-        case 2:
-          Console.WriteLine("Pokemon");
-          break;
-        case 3:
-          loop = false;
-          Console.Clear();
-          Console.WriteLine("Você saiu!");
-          break;
-        default:
-          Console.WriteLine("Opção inválida");
-          break;
+    int op = 0;
+    Console.WriteLine("............. PokeList ............. ");
+    do{
+      try{
+        op = Menu();
+        switch(op){
+          case 1 : TypeListar(); break;
+          case 2 : TypeInserir(); break;
+        }
       }
-    }
+      catch(Exception erro){
+        Console.WriteLine(erro.Message);
+        op = 100;
+      }
+
+    } while(op != 0);
+    Console.WriteLine("Goodbye...");
+  }
+  public static int Menu(){
+    Console.WriteLine();
+    Console.WriteLine("...........................................");
+    Console.WriteLine("1 - Tipos - Listar");
+    Console.WriteLine("2 - Tipos - Inserir");
+    Console.WriteLine("0 - Finalizar Aplicação");
+    Console.Write("Informe uma opção: ");
+    int op = int.Parse(Console.ReadLine());
+    Console.WriteLine();
+    return op;
+  }
+  public static void TypeListar(){
+    Console.WriteLine("............. Lista de tipos ............. ");
+  }
+  public static void TypeInserir(){
+    Console.WriteLine("............. Adicionar tipo ............. ");
+
   }
 }

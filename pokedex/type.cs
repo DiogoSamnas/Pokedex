@@ -23,7 +23,7 @@ class Type{
     return id;
   }
 
-  public string GetDescricao(){
+  public string GetDescription(){
     return description;
   }
   
