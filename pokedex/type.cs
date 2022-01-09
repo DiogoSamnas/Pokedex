@@ -3,7 +3,7 @@ using System;
 class Type{
   private int id;
   private string description;
-  private Pokemon[] pokemons = new Pokemon[10];
+  private Pokemon[] pokemons = new Pokemon[1];
   private int np;
 
   public Type(int id, string description){
@@ -33,6 +33,9 @@ class Type{
     return c;
   }
   public void PokemonInserir(Pokemon P){
+    if(np == pokemons.Length){
+      Array.Resize(ref pokemons, 2 * pokemons.Length);
+    }
     pokemons[np] = P;
     np++;
   }
