@@ -8,8 +8,15 @@ class MainClass{
     Pokemon poke1 = new Pokemon(1,"Bulbasaur", 0.7, 6.9, 45, 49, 49, 65, 65, 45, grass);
     Pokemon poke2 = new Pokemon(2,"Ivysaur", 1.0, 13.0, 60, 62, 63, 80, 80, 60, grass);
 
+    grass.PokemonInserir(poke1);
+    grass.PokemonInserir(poke2);
 
-    Console.Clear();
+    Pokemon[] v = grass.PokemonListar();
+    Console.WriteLine("Pokemons tipo: " + grass.GetDescricao());
+    foreach(Pokemon p in v) Console.WriteLine(p);
+    Console.WriteLine();
+
+
     while(loop) {
       Console.WriteLine("1 - Cadastrar Tipo");
       Console.WriteLine("2 - Cadastrar Pokemon");

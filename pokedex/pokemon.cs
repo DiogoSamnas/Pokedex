@@ -67,6 +67,6 @@ class Pokemon{
       return id + " - " + name + " | heigth = " + heigth + " m" + " | weigth = " + weigth + " kg" + " | hp = " + hp + " | attack = " + attack + " | defense = " + defense + " | spAttack = " + spAttack + " | spDefense = " + spDefense + " | speed = " + speed;
     }
     else
-      return id + " - " + name + " | heigth = " + heigth + " m" + " | weigth = " + weigth + " kg" + " | hp = " + hp + " | attack = " + attack + " | defense = " + defense + " | spAttack = " + spAttack + " | spDefense = " + spDefense + " | speed = " + speed + " | Type = " + type.GetDescription();
+      return id + " - " + name + " | heigth = " + heigth + " m" + " | weigth = " + weigth + " kg" + " | hp = " + hp + " | attack = " + attack + " | defense = " + defense + " | spAttack = " + spAttack + " | spDefense = " + spDefense + " | speed = " + speed + " | Type = " + type.GetDescricao();
   }
 }
