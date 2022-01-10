@@ -39,6 +39,20 @@ class Type{
     pokemons[np] = P;
     np++;
   }
+  private int PokemonIndice(Pokemon p){
+    for(int i = 0; i < np; i++){
+      if(pokemons[i] == p) return i;
+    }
+    return -1;
+  }
+  public void PokemonExcluir(Pokemon p){
+    int n = PokemonIndice(p);
+    if(n == -1) return;
+    for(int i = 0; i < np - 1; i++){
+      pokemons[i] = pokemons[i + 1];
+    }
+    n--;
+  }
 
   public override string ToString(){
     return id + " - " + description + " - Nº Pokemons:" + np;

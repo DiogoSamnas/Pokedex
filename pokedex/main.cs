@@ -142,9 +142,49 @@ class MainClass{
     npokemon.Inserir(p);
   }
   public static void PokemonAtualizar(){
+    Console.WriteLine("............. Atualizar pokemon ............. ");
+    PokemonListar();
 
+    Console.Write("Informe o código do pokemon: ");
+    int id = int.Parse(Console.ReadLine());
+    Console.Write("Infome o nome do pokemon: ");
+    string name = Console.ReadLine();
+    Console.Write("Informe o tamanho do pokemon: ");
+    double heigth = double.Parse(Console.ReadLine());
+    Console.Write("Informe o peso do pokemon: ");
+    double weigth = double.Parse(Console.ReadLine());
+    Console.Write("Informe os pontos do vida do pokemon: ");
+    int hp = int.Parse(Console.ReadLine());
+    Console.Write("Informe os pontos de ataque do pokemon: ");
+    int attack = int.Parse(Console.ReadLine());
+    Console.Write("Informe os pontos de defesa do pokemon: ");
+    int defense = int.Parse(Console.ReadLine());
+    Console.Write("Informe os pontos de ataque especial do pokemon: ");
+    int spAttack = int.Parse(Console.ReadLine());
+    Console.Write("Informe os pontos de defesa especial do pokemon: ");
+    int spDefense = int.Parse(Console.ReadLine());
+    Console.Write("Informe os pontos de velocidade do pokemon: ");
+    int speed = int.Parse(Console.ReadLine());
+
+    Console.WriteLine("Tipos de pokemon");
+    TypeListar();
+    Console.Write("Informe o código do tipo do pokemon: ");
+    int idtype = int.Parse(Console.ReadLine()); 
+
+    Type t = ntype.Listar(idtype);
+
+    Pokemon p = new Pokemon(id, name, heigth, weigth, hp, attack, defense, spAttack, spDefense, speed, t);
+
+    npokemon.Atualizar(p);
   }
   public static void PokemonExcluir(){
-    
+    Console.WriteLine("............. Excluir Pokemon ............. ");
+    PokemonListar();
+    Console.Write("Informe o código do pokmeon a ser excluido: ");
+    int id = int.Parse(Console.ReadLine());
+
+    Pokemon p  = npokemon.Listar(id);
+
+    npokemon.Excluir(p);
   }
 }

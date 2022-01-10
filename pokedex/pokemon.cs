@@ -66,6 +66,33 @@ class Pokemon{
     return id;
   }
 
+  public string GetName(){
+    return name;
+  }
+  public double GetHeigth(){
+    return heigth;
+  }
+  public double GetWeigth(){
+    return weigth;
+  }
+  public int GetHp(){
+    return hp;
+  }
+  public int GetAttack(){
+    return attack;
+  }
+  public int GetDefense(){
+    return defense;
+  }
+  public int GetSpAttack(){
+    return spAttack;
+  }
+  public int GetSpDefense(){
+    return defense;
+  }
+  public int GetSpeed(){
+    return speed;
+  }
   public Type GetType(){
     return type;
   }
