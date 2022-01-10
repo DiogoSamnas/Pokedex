@@ -1,6 +1,7 @@
 using System;
 
 class MainClass{
+  private static NType ntype = new NType();
   public static void Main(){
     int op = 0;
     Console.WriteLine("............. PokeList ............. ");
@@ -33,9 +34,24 @@ class MainClass{
   }
   public static void TypeListar(){
     Console.WriteLine("............. Lista de tipos ............. ");
+    Type[] ts = ntype.Listar();
+    if(ts.Length == 0){
+      Console.WriteLine("Nehum tipo cadastrado :(");
+      return;
+    }
+    foreach(Type t in ts){
+      Console.WriteLine(t);
+    }
   }
   public static void TypeInserir(){
     Console.WriteLine("............. Adicionar tipo ............. ");
+    Console.Write("Informe o código do tipo: ");
+    int id = int.Parse(Console.ReadLine());
+    Console.Write("Infome o nome do tipo: ");
+    string description = Console.ReadLine();
 
+    Type t = new Type(id, description);
+
+    ntype.Inserir(t);
   }
 }

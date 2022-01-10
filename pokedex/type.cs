@@ -41,7 +41,7 @@ class Type{
   }
 
   public override string ToString(){
-    return id + " - " + description + "Nº Pokemons:" + np;
+    return id + " - " + description + "- Nº Pokemons:" + np;
   }
 
 
