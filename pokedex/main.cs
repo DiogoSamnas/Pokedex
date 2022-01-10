@@ -5,6 +5,7 @@ class MainClass{
   private static NPokemon npokemon = new NPokemon();
   public static void Main(){
     int op = 0;
+    Console.Clear();
     Console.WriteLine("............. PokeList ............. ");
     do{
       try{
