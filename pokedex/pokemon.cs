@@ -15,7 +15,7 @@ class Pokemon{
   private Type type;
 
   public Pokemon(int id, string name, double heigth, double weigth, int hp, int attack, int defense, int spAttack, int spDefense, int speed, Type type){
-      this.id = id;
+    this.id = id;
     this.name = name;
     this.heigth = heigth;
     this.weigth = weigth;
@@ -60,6 +60,14 @@ class Pokemon{
   }
   public void SetType(Type type){
     this.type = type;
+  }
+
+  public int GetId(){
+    return id;
+  }
+
+  public Type GetType(){
+    return type;
   }
 
   public override string ToString(){
