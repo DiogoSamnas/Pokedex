@@ -25,4 +25,34 @@ class NType{
     types[nt] = t;
     nt++;
   }
+
+  public void Atualizar(Type t){
+    Type t_atual = Listar(t.GetId());
+    if(t_atual == null){ 
+      return;
+    }
+    t_atual.SetDescription(t.GetDescription());
+  }
+
+  private int Indice(Type t){
+    for(int i = 0; i < nt; i++){
+      if(types[i] == t) return i;
+    }
+    return -1;
+  }
+
+  public void Excluir(Type t){
+    int n = Indice(t);
+    if(n == -1) return;
+    for(int i = n; i < nt - 1; i++){
+      types[i] = types[i + 1];
+    }
+    nt--;
+
+    Pokemon[] ps = t.PokemonListar();
+    foreach(Pokemon p in ps){
+      p.SetType(null);
+    }
+  }
+  
 }

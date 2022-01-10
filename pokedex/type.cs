@@ -15,7 +15,7 @@ class Type{
     this.id = id;
   }
 
-  public void SetDescripition(string description){
+  public void SetDescription(string description){
     this.description = description;
   }
 
@@ -41,7 +41,7 @@ class Type{
   }
 
   public override string ToString(){
-    return id + " - " + description + "- Nº Pokemons:" + np;
+    return id + " - " + description + " - Nº Pokemons:" + np;
   }
 
 

@@ -12,8 +12,12 @@ class MainClass{
         switch(op){
           case 1 : TypeListar(); break;
           case 2 : TypeInserir(); break;
-          case 3 : PokemonListar(); break;
-          case 4 : PokemonInserir(); break;
+          case 3 : TypeAtualizar(); break;
+          case 4 : TypeExcluir(); break;
+          case 5 : PokemonListar(); break;
+          case 6 : PokemonInserir(); break;
+          case 7 : PokemonAtualizar(); break;
+          case 8 : PokemonExcluir(); break;
         }
       }
       catch(Exception erro){
@@ -29,8 +33,13 @@ class MainClass{
     Console.WriteLine("...........................................");
     Console.WriteLine("1 - Tipos - Listar");
     Console.WriteLine("2 - Tipos - Inserir");
-    Console.WriteLine("3 - Pokemon - Listar");
-    Console.WriteLine("4 - Pokemon - Inserir");
+    Console.WriteLine("3 - Tipos - Atualizar");
+    Console.WriteLine("4 - Tipos - Excluir");
+    Console.WriteLine("5 - Pokemon - Listar");
+    Console.WriteLine("6 - Pokemon - Inserir");
+    Console.WriteLine("7 - Pokemon - Atualizar");
+    Console.WriteLine("8 - Pokemon - Excluir");
+    Console.WriteLine("------------------------");
     Console.WriteLine("0 - Finalizar Aplicação");
     Console.Write("Informe uma opção: ");
     int op = int.Parse(Console.ReadLine());
@@ -53,13 +62,36 @@ class MainClass{
     Console.WriteLine("............. Adicionar tipo ............. ");
     Console.Write("Informe o código do tipo: ");
     int id = int.Parse(Console.ReadLine());
-    Console.Write("Infome o nome do tipo: ");
+    Console.Write("Infome o tipo: ");
     string description = Console.ReadLine();
 
     Type t = new Type(id, description);
 
     ntype.Inserir(t);
   }
+  public static void TypeAtualizar(){
+    Console.WriteLine("............. Atualizar tipo ............. ");
+    TypeListar();
+    Console.Write("Informe o código do tipo para atualizar: ");
+    int id = int.Parse(Console.ReadLine());
+    Console.Write("Infome o novo tipo:");
+    string description = Console.ReadLine();
+
+    Type t = new Type(id, description);
+
+    ntype.Atualizar(t);
+  }
+  public static void TypeExcluir(){
+    Console.WriteLine("............. Excluir tipo ............. ");
+    TypeListar();
+    Console.Write("Informe o código do tipo para excluir: ");
+    int id = int.Parse(Console.ReadLine());
+
+    Type t = ntype.Listar(id);
+
+    ntype.Excluir(t);
+  }
+
   
 
   public static void PokemonListar(){
@@ -108,5 +140,11 @@ class MainClass{
     Pokemon p = new Pokemon(id, name, heigth, weigth, hp, attack, defense, spAttack, spDefense, speed, t);
 
     npokemon.Inserir(p);
+  }
+  public static void PokemonAtualizar(){
+
+  }
+  public static void PokemonExcluir(){
+    
   }
 }
