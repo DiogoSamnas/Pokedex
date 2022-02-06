@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 
 class MainClass{
   private static NType ntype = new NType();
   private static NPokemon npokemon = new NPokemon();
+  private static NUser nuser = new NUser();
   public static void Main(){
     int op = 0;
     Console.Clear();
@@ -19,6 +21,10 @@ class MainClass{
           case 6 : PokemonInserir(); break;
           case 7 : PokemonAtualizar(); break;
           case 8 : PokemonExcluir(); break;
+          case 9 : UserListar(); break;
+          case 10 : UserInserir(); break;
+          case 11 : UserAtualizar(); break;
+          case 12 : UserExcluir(); break;
         }
       }
       catch(Exception erro){
@@ -32,14 +38,18 @@ class MainClass{
   public static int Menu(){
     Console.WriteLine();
     Console.WriteLine("...........................................");
-    Console.WriteLine("1 - Tipos - Listar");
-    Console.WriteLine("2 - Tipos - Inserir");
-    Console.WriteLine("3 - Tipos - Atualizar");
-    Console.WriteLine("4 - Tipos - Excluir");
-    Console.WriteLine("5 - Pokemon - Listar");
-    Console.WriteLine("6 - Pokemon - Inserir");
-    Console.WriteLine("7 - Pokemon - Atualizar");
-    Console.WriteLine("8 - Pokemon - Excluir");
+    Console.WriteLine("01 - Tipos - Listar");
+    Console.WriteLine("02 - Tipos - Inserir");
+    Console.WriteLine("03 - Tipos - Atualizar");
+    Console.WriteLine("04 - Tipos - Excluir");
+    Console.WriteLine("05 - Pokemon - Listar");
+    Console.WriteLine("06 - Pokemon - Inserir");
+    Console.WriteLine("07 - Pokemon - Atualizar");
+    Console.WriteLine("08 - Pokemon - Excluir");
+    Console.WriteLine("09 - Usuário - Listar");
+    Console.WriteLine("10 - Usuário - Inserir");
+    Console.WriteLine("11 - Usuário - Atualizar");
+    Console.WriteLine("12 - Usuário - Excluir");
     Console.WriteLine("------------------------");
     Console.WriteLine("0 - Finalizar Aplicação");
     Console.Write("Informe uma opção: ");
@@ -187,5 +197,50 @@ class MainClass{
     Pokemon p  = npokemon.Listar(id);
 
     npokemon.Excluir(p);
+  }
+
+public static void UserListar(){
+    Console.WriteLine("............. Lista de usuários ............. ");
+    // Lista os usuários
+    List<User> us = nuser.Listar();
+    if(us.Count == 0){
+      Console.WriteLine("Nehum usuário cadastrado :(");
+      return;
+    }
+    foreach(User u in us){
+      Console.WriteLine(u);
+    }
+    Console.WriteLine();
+  }
+  public static void UserInserir(){
+    Console.WriteLine("............. Adicionar usuário ............. ");
+    Console.Write("Infome o nome do usuário: ");
+    string nome = Console.ReadLine();
+    // Instancia a classe de usuário
+    User u = new User{Nome = nome};
+    // Insere o usuário
+    nuser.Inserir(u);
+  }
+  public static void UserAtualizar(){
+    Console.WriteLine("............. Atualizar usuário ............. ");
+    TypeListar();
+    Console.Write("Informe o código do usuário para atualizar:");
+    int id = int.Parse(Console.ReadLine());
+    Console.Write("Infome o novo nome de usuário:");
+    string nome = Console.ReadLine();
+    // Instancia a classe de usuário
+    User u = new User{Id = id,  Nome = nome};
+    // Atualiza o usuário
+    nuser.Atualizar(u);
+  }
+  public static void UserExcluir(){
+    Console.WriteLine("............. Excluir usuário ............. ");
+    TypeListar();
+    Console.Write("Informe o código do usuário a ser excluído: ");
+    int id = int.Parse(Console.ReadLine());
+    // Procura o usuário com o id informado
+    User u  = nuser.Listar(id);
+    // Exclui o usuário 
+    nuser.Excluir(u);
   }
 }
