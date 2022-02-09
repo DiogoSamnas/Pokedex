@@ -5,26 +5,55 @@ class MainClass{
   private static NType ntype = new NType();
   private static NPokemon npokemon = new NPokemon();
   private static NUser nuser = new NUser();
+  private static User userLogin = null;
   public static void Main(){
     int op = 0;
-    Console.Clear();
+    int perfil = 0;
     Console.WriteLine("............. PokeList ............. ");
     do{
       try{
-        op = Menu();
-        switch(op){
-          case 1 : TypeListar(); break;
-          case 2 : TypeInserir(); break;
-          case 3 : TypeAtualizar(); break;
-          case 4 : TypeExcluir(); break;
-          case 5 : PokemonListar(); break;
-          case 6 : PokemonInserir(); break;
-          case 7 : PokemonAtualizar(); break;
-          case 8 : PokemonExcluir(); break;
-          case 9 : UserListar(); break;
-          case 10 : UserInserir(); break;
-          case 11 : UserAtualizar(); break;
-          case 12 : UserExcluir(); break;
+        if(perfil == 0){
+          //perfil do convidado
+          op = 0;
+          perfil = MenuConvidado();
+        }
+        if(perfil == 1){
+          //pefil do admin
+          op = MenuAdmin();
+          switch(op){
+            case 1 : TypeListar(); break;
+            case 2 : TypeInserir(); break;
+            case 3 : TypeAtualizar(); break;
+            case 4 : TypeExcluir(); break;
+            case 5 : PokemonListar(); break;
+            case 6 : PokemonInserir(); break;
+            case 7 : PokemonAtualizar(); break;
+            case 8 : PokemonExcluir(); break;
+            case 9 : UserListar(); break;
+            case 10 : UserInserir(); break;
+            case 11 : UserAtualizar(); break;
+            case 12 : UserExcluir(); break;
+            case 99 : perfil = 0; break;
+          }
+        }
+        if(perfil == 2 && userLogin == null){
+          // usuário não logado
+          op = MenuUserLogin();
+          switch(op){
+            case 1 : UserLogin(); break;
+            case 99 : perfil = 0; break;
+          }
+        }
+        if(perfil == 2 && userLogin != null){
+          // usuário logado
+          op = MenuUserLogout();
+          switch(op){
+            case 1 : UserEquipeListar(); break;
+            case 2 : UserPokemonListar(); break;
+            case 3 : UserPokemonInserir(); break;
+            case 4 : UserEquipeLimpar(); break;
+            case 99 : UserLogout(); break;
+          }
         }
       }
       catch(Exception erro){
@@ -35,7 +64,48 @@ class MainClass{
     } while(op != 0);
     Console.WriteLine("Goodbye...");
   }
-  public static int Menu(){
+  public static int MenuConvidado(){
+    Console.WriteLine("...........................................");
+    Console.WriteLine("1 - Entrar como administrador");
+    Console.WriteLine("2 - Entrar como usuário");
+    Console.WriteLine("------------------------");
+    Console.WriteLine("0 - Finalizar Aplicação");
+    Console.WriteLine("------------------------");
+    Console.Write("Informe uma opção: ");
+    int op = int.Parse(Console.ReadLine());
+    Console.WriteLine();
+    return op;
+  }
+  public static int MenuUserLogin(){
+    Console.WriteLine("...........................................");
+    Console.WriteLine("1 - Login");
+    Console.WriteLine("------------------------");
+    Console.WriteLine("99 - Voltar");
+    Console.WriteLine("0 - Finalizar Aplicação");
+    Console.WriteLine("------------------------");
+    Console.Write("Informe uma opção: ");
+    int op = int.Parse(Console.ReadLine());
+    Console.WriteLine();
+    return op;
+  }
+  public static int MenuUserLogout(){
+    Console.WriteLine("...........................................");
+    Console.WriteLine("Bem vindo(a), " + userLogin.Nome);
+    Console.WriteLine("...........................................");
+    Console.WriteLine("1 - Ver minha equipe");
+    Console.WriteLine("2 - Listar Pokemons");
+    Console.WriteLine("3 - Adicionar Pokemons a equipe");
+    Console.WriteLine("4 - Limpar equipe");
+    Console.WriteLine("------------------------");
+    Console.WriteLine("99 - Logout");
+    Console.WriteLine("0 - Finalizar Aplicação");
+    Console.WriteLine("------------------------");
+    Console.Write("Informe uma opção: ");
+    int op = int.Parse(Console.ReadLine());
+    Console.WriteLine();
+    return op;
+  }
+  public static int MenuAdmin(){
     Console.WriteLine();
     Console.WriteLine("...........................................");
     Console.WriteLine("01 - Tipos - Listar");
@@ -51,7 +121,9 @@ class MainClass{
     Console.WriteLine("11 - Usuário - Atualizar");
     Console.WriteLine("12 - Usuário - Excluir");
     Console.WriteLine("------------------------");
+    Console.WriteLine("99 - Voltar");
     Console.WriteLine("0 - Finalizar Aplicação");
+    Console.WriteLine("------------------------");
     Console.Write("Informe uma opção: ");
     int op = int.Parse(Console.ReadLine());
     Console.WriteLine();
@@ -223,7 +295,7 @@ public static void UserListar(){
   }
   public static void UserAtualizar(){
     Console.WriteLine("............. Atualizar usuário ............. ");
-    TypeListar();
+    UserListar();
     Console.Write("Informe o código do usuário para atualizar:");
     int id = int.Parse(Console.ReadLine());
     Console.Write("Infome o novo nome de usuário:");
@@ -235,12 +307,35 @@ public static void UserListar(){
   }
   public static void UserExcluir(){
     Console.WriteLine("............. Excluir usuário ............. ");
-    TypeListar();
+    UserListar();
     Console.Write("Informe o código do usuário a ser excluído: ");
     int id = int.Parse(Console.ReadLine());
     // Procura o usuário com o id informado
     User u  = nuser.Listar(id);
     // Exclui o usuário 
     nuser.Excluir(u);
+  }
+  public static void UserLogin(){
+    Console.WriteLine("----- Login -----");
+    UserListar();
+    Console.Write("Informe o código do usuário para logar:");
+    int id = int.Parse(Console.ReadLine());
+    userLogin = nuser.Listar(id);
+  }
+  public static void UserLogout(){
+    Console.WriteLine("----- Logout -----");   
+    userLogin = null;   
+  }
+  public static void UserEquipeListar(){
+    Console.WriteLine("----- Visualizar equipe -----");              
+  }
+  public static void UserPokemonListar(){
+    Console.WriteLine("----- Visualizar Pokemons -----"); 
+  }
+  public static void UserPokemonInserir(){
+    Console.WriteLine("----- Adicionar Pokemons a equipe -----"); 
+  }
+  public static void UserEquipeLimpar(){
+    Console.WriteLine("----- Limpar equipe -----"); 
   }
 }

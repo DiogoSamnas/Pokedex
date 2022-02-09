@@ -6,13 +6,14 @@ class NUser{
 
   public List<User> Listar(){
     // Retorna uma lista com os usuarios cadastrados 
+    users.Sort();
     return users;
   }
 
   public User Listar(int id){
     // Localiza na list o usuario com o id informado
     for(int i = 0;i < users.Count;i++){
-      if(user[i].Id == id) return users[i];
+      if(users[i].Id == id) return users[i];
     }
     return null;
   }
