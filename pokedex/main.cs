@@ -5,7 +5,11 @@ class MainClass{
   private static NType ntype = new NType();
   private static NPokemon npokemon = new NPokemon();
   private static NUser nuser = new NUser();
+  private static NEquipe nequipe = new NEquipe();
+
   private static User userLogin = null;
+  private static Equipe userEquipe = null;
+
   public static void Main(){
     int op = 0;
     int perfil = 0;
@@ -33,6 +37,7 @@ class MainClass{
             case 10 : UserInserir(); break;
             case 11 : UserAtualizar(); break;
             case 12 : UserExcluir(); break;
+            case 13 : EquipeListar(); break;
             case 99 : perfil = 0; break;
           }
         }
@@ -52,6 +57,8 @@ class MainClass{
             case 2 : UserPokemonListar(); break;
             case 3 : UserPokemonInserir(); break;
             case 4 : UserEquipeLimpar(); break;
+            case 5 : UserEquipeSalvar(); break;
+            case 6 : UserHistoricoListar();break; 
             case 99 : UserLogout(); break;
           }
         }
@@ -96,6 +103,8 @@ class MainClass{
     Console.WriteLine("2 - Listar Pokemons");
     Console.WriteLine("3 - Adicionar Pokemons a equipe");
     Console.WriteLine("4 - Limpar equipe");
+    Console.WriteLine("5 - Salvar equipe");
+    Console.WriteLine("6 - Historico de equipes");
     Console.WriteLine("------------------------");
     Console.WriteLine("99 - Logout");
     Console.WriteLine("0 - Finalizar Aplicação");
@@ -120,6 +129,7 @@ class MainClass{
     Console.WriteLine("10 - Usuário - Inserir");
     Console.WriteLine("11 - Usuário - Atualizar");
     Console.WriteLine("12 - Usuário - Excluir");
+    Console.WriteLine("13 - Equipes - Listar");
     Console.WriteLine("------------------------");
     Console.WriteLine("99 - Voltar");
     Console.WriteLine("0 - Finalizar Aplicação");
@@ -293,6 +303,7 @@ public static void UserListar(){
     // Insere o usuário
     nuser.Inserir(u);
   }
+  
   public static void UserAtualizar(){
     Console.WriteLine("............. Atualizar usuário ............. ");
     UserListar();
@@ -305,6 +316,7 @@ public static void UserListar(){
     // Atualiza o usuário
     nuser.Atualizar(u);
   }
+
   public static void UserExcluir(){
     Console.WriteLine("............. Excluir usuário ............. ");
     UserListar();
@@ -315,27 +327,126 @@ public static void UserListar(){
     // Exclui o usuário 
     nuser.Excluir(u);
   }
+
+
+  public static void EquipeListar(){
+    Console.WriteLine("............. Lista de equipes ............. ");
+    // Listar todas as equipes
+    List<Equipe> es = nequipe.Listar();
+    if(es.Count == 0){
+      Console.WriteLine("Nenhum equipe cadastrada");
+      return;
+    }
+    foreach(Equipe e in es){
+      Console.WriteLine("--------------------------------- ");
+      Console.WriteLine(e);
+      foreach(EquipePokemon pokemon in nequipe.EquipePokemonListar(e)){
+        Console.WriteLine("  " + pokemon);
+      }
+      Console.WriteLine("--------------------------------- ");
+    }
+    Console.WriteLine();
+  }
+
+
   public static void UserLogin(){
     Console.WriteLine("----- Login -----");
     UserListar();
     Console.Write("Informe o código do usuário para logar:");
     int id = int.Parse(Console.ReadLine());
+    // Procura usuário com esse id
     userLogin = nuser.Listar(id);
+    // Abri equipe do usuário caso ele tenha salvo
+    userEquipe = nequipe.ListarEquipe(userLogin);
   }
+
   public static void UserLogout(){
-    Console.WriteLine("----- Logout -----");   
+    Console.WriteLine("----- Logout -----");  
+    if(userEquipe != null) nequipe.Inserir(userEquipe, true);
+    //Faz logout do usuário
     userLogin = null;   
+    userEquipe = null;
   }
+
   public static void UserEquipeListar(){
-    Console.WriteLine("----- Visualizar equipe -----");              
+    //Verifica se existe uma equipe
+    if(userEquipe == null){
+      Console.WriteLine("Sua equipe está vazia :(");
+      return;
+    }
+    // Lista os pokemons na equipe
+    List<EquipePokemon> pokemons = nequipe.EquipePokemonListar(userEquipe);
+    Console.WriteLine(userEquipe.GetNome());
+    foreach(EquipePokemon pokemon in pokemons){
+      Console.WriteLine(pokemon);
+    }
+    Console.WriteLine();
+
   }
+
   public static void UserPokemonListar(){
-    Console.WriteLine("----- Visualizar Pokemons -----"); 
+    // Listar os pokemons cadastrados no sistema
+    PokemonListar(); 
   }
+
   public static void UserPokemonInserir(){
-    Console.WriteLine("----- Adicionar Pokemons a equipe -----"); 
+    // Listar os pokemons cadastrados no sistema
+    PokemonListar(); 
+    Console.Write("Informe o código do pokemon:");
+    int id = int.Parse(Console.ReadLine());
+
+    // Procura pokemon pelo id
+    Pokemon p = npokemon.Listar(id);
+    // Verifica se o pokemon foi localizado
+    if(p != null){
+      // Verifica se ja existe uma equipe
+      if(userEquipe == null) 
+        Console.WriteLine("----- Criar nova equipe -----");
+        Console.Write("Digite o nome da equipe: ");
+        string nome =  Console.ReadLine();
+        userEquipe = new Equipe(nome,userLogin);
+      // Insere pokemon na equipe
+      nequipe.EquipePokemonInserir(userEquipe,p);
+    }
   }
+
   public static void UserEquipeLimpar(){
-    Console.WriteLine("----- Limpar equipe -----"); 
+    //verificar se existe uma equipe
+    if(userEquipe != null){
+      nequipe.EquipePokemonExcluir(userEquipe);
+    Console.WriteLine("----- Pokemons removidos da equipe -----"); 
+    }
+  }
+
+  public static void UserEquipeSalvar(){
+    // Verifica se existe uma equipe
+    if(userEquipe == null){
+      Console.WriteLine("Nenhum pokemon foi adicionado a equipe");
+      return;
+    }
+    //Visualiza equipe
+    UserEquipeListar();
+    //Salvar equipe
+    nequipe.Inserir(userEquipe,false);
+    //Inicia nova equipe
+    userEquipe = null;
+    Console.WriteLine("----- Equipe salva!-----"); 
+  }
+
+  public static void UserHistoricoListar(){
+    Console.WriteLine("----- Equipes salvas -----");
+    // Listar Equipes do usuário
+    List<Equipe> es = nequipe.Listar(userLogin);
+    if(es.Count == 0){
+      Console.WriteLine("Nenhum equipe salva");
+      return;
+    }
+    foreach(Equipe e in es){
+      Console.WriteLine(e);
+      foreach(EquipePokemon pokemon in nequipe.EquipePokemonListar(e)){
+        Console.WriteLine("  " + pokemon);
+      }
+    }
+    Console.WriteLine();
   }
 }

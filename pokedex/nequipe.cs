@@ -21,18 +21,20 @@ class NEquipe{
   public Equipe ListarEquipe(User u){
     // Retorna a equipe do usuário u
     foreach(Equipe e in equipes)
-      if(e.GetUser() == u) return e;
+      if(e.GetUser() == u && e.GetSalvo()) return e;
     return null;
   }
 
-  public void Inserir(Equipe e){
+  public void Inserir(Equipe e, bool salvo){
     //gerar o id da equipe
     int max = 0;
     foreach(Equipe obj in equipes)
       if(obj.GetId() > max) max = obj.GetId();
     e.SetId(max + 1);
-    //Inserir equipe na lista de equipes
+    // Inserir equipe na lista de equipes
     equipes.Add(e);
+    // Define o atributo salvo
+    e.SetSalvo(salvo);
   }
 
   public List<EquipePokemon> EquipePokemonListar(Equipe e){
