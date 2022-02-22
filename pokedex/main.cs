@@ -11,6 +11,16 @@ class MainClass{
   private static Equipe userEquipe = null;
 
   public static void Main(){
+
+    try{
+      ntype.Abrir();
+      npokemon.Abrir();
+    }
+    catch(Exception erro){
+      Console.WriteLine(erro.Message);
+    }
+    
+    // Console.Clear();
     int op = 0;
     int perfil = 0;
     Console.WriteLine("............. PokeList ............. ");
@@ -69,6 +79,13 @@ class MainClass{
       }
 
     } while(op != 0);
+    try{
+      ntype.Salvar();
+      npokemon.Salvar();
+    }
+    catch(Exception erro){
+      Console.WriteLine(erro.Message);
+    }
     Console.WriteLine("Goodbye...");
   }
   public static int MenuConvidado(){

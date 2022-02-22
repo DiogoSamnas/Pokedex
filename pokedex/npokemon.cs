@@ -1,10 +1,27 @@
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
 
 class NPokemon{
   private Pokemon[] pokemons = new Pokemon[10];
   private int np;
 
-
+  
+  public void Abrir(){
+    XmlSerializer xml = new XmlSerializer(typeof(Pokemon[])); 
+    StreamReader f = new StreamReader("./pokemons.xml",Encoding.Default);
+    pokemons = (Pokemon[]) xml.Deserialize(f);
+    f.Close();
+    np = pokemons.Length;
+  }
+  public void Salvar(){
+    XmlSerializer xml = new XmlSerializer(typeof(Pokemon[])); 
+    StreamWriter f = new StreamWriter("./pokemons.xml",false,Encoding.Default);
+    xml.Serialize(f, Listar());
+    f.Close();
+  }
+  
   public Pokemon[] Listar(){
     Pokemon[] p = new Pokemon[np];
     Array.Copy(pokemons, p, np);

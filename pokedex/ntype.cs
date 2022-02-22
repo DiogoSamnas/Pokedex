@@ -1,9 +1,25 @@
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
 
 class NType{
   private Type[] types = new Type[10];
   private int nt;
 
+  public void Abrir(){
+    XmlSerializer xml = new XmlSerializer(typeof(Type[])); 
+    StreamReader f = new StreamReader("./types.xml",Encoding.Default);
+    types = (Type[]) xml.Deserialize(f);
+    f.Close();
+    nt = types.Length;
+  }
+  public void Salvar(){
+    XmlSerializer xml = new XmlSerializer(typeof(Type[])); 
+    StreamWriter f = new StreamWriter("./types.xml",false,Encoding.Default);
+    xml.Serialize(f, Listar());
+    f.Close();
+  }
 
   public Type[] Listar(){
     Type[] t = new Type[nt];

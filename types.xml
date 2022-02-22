@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfType xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Type>
+    <Id>1</Id>
+    <Description>Grass</Description>
+  </Type>
+  <Type>
+    <Id>2</Id>
+    <Description>Fire</Description>
+  </Type>
+  <Type>
+    <Id>3</Id>
+    <Description>Water</Description>
+  </Type>
+</ArrayOfType>
