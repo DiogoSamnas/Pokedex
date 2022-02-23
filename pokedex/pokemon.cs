@@ -1,7 +1,7 @@
 using System;
 
 
-public class Pokemon{
+class Pokemon{
   private int id;
   private string name;
   private double heigth;
@@ -12,27 +12,9 @@ public class Pokemon{
   private int spAttack;
   private int spDefense;
   private int speed;
-  private int typeId;
-
   private Type type;
 
-  // Propriedades e construtor necessários para serialização
-  public int Id {get => id; set => id = value;}
-  public string Name {get => name; set => name = value;}
-  public double Heigth {get => heigth; set => heigth = value;}
-  public double Weigth {get => weigth; set => weigth = value;}
-  public int Hp {get => hp; set => hp = value;}
-  public int Attack {get => attack; set => attack = value;}
-  public int Defense {get => defense; set => defense = value;}
-  public int SpAttack {get => spAttack; set => spAttack = value;}
-  public int SpDefense {get => spDefense; set => spDefense = value;}
-  public int Speed {get => speed; set => speed = value;}
-  public int TypeId {get => typeId; set => typeId = value;}
-
-  public Pokemon(){}
-  
-
-  public Pokemon(int id, string name, double heigth, double weigth, int hp, int attack, int defense, int spAttack, int spDefense, int speed){
+  public Pokemon(int id, string name, double heigth, double weigth, int hp, int attack, int defense, int spAttack, int spDefense, int speed, Type type){
     this.id = id;
     this.name = name;
     this.heigth = heigth;
@@ -43,10 +25,7 @@ public class Pokemon{
     this.spAttack = spAttack;
     this.spDefense = spDefense;
     this.speed = speed;
-  }
-  public Pokemon(int id, string name, double heigth, double weigth, int hp, int attack, int defense, int spAttack, int spDefense, int speed, Type type) : this(id, name, heigth, weigth, hp, attack, defense, spAttack, spDefense, speed){
     this.type = type;
-    this.typeId = type.GetId();
   }
 
   public void SetId(int id){
@@ -81,7 +60,6 @@ public class Pokemon{
   }
   public void SetType(Type type){
     this.type = type;
-    this.typeId = type.GetId();
   }
 
   public int GetId(){
