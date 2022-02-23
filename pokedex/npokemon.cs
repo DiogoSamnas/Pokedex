@@ -4,6 +4,10 @@ using System.Text;
 using System.IO;
 
 class NPokemon{
+  private NPokemon() { }
+  static NPokemon obj = new NPokemon();
+  public static NPokemon Singleton{get => obj;}
+  
   private Pokemon[] pokemons = new Pokemon[10];
   private int np;
 
@@ -14,6 +18,21 @@ class NPokemon{
     pokemons = (Pokemon[]) xml.Deserialize(f);
     f.Close();
     np = pokemons.Length;
+    AtualizarPokemon();
+  }
+  private void AtualizarPokemon(){
+    // percorrer vetor de pokemons para atualizar a categoria do pokemon
+    for(int i = 0; i < np; i++){
+      //Cada pokemon no vetor 
+      Pokemon p = pokemons[i];
+      // Recuperar o tipo do pokemon
+      Type t = NType.Singleton.Listar(p.TypeId);
+      // Associaçäo entre tipo e pokemon
+      if(t != null){
+        p.SetType(t);
+        t.PokemonInserir(p);
+      }
+    }
   }
   public void Salvar(){
     XmlSerializer xml = new XmlSerializer(typeof(Pokemon[])); 

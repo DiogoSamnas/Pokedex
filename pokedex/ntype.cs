@@ -4,6 +4,10 @@ using System.Text;
 using System.IO;
 
 class NType{
+  private NType() { }
+  static NType obj = new NType();
+  public static NType Singleton{get => obj;}
+  
   private Type[] types = new Type[10];
   private int nt;
 

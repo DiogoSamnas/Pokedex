@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 
 class MainClass{
-  private static NType ntype = new NType();
-  private static NPokemon npokemon = new NPokemon();
+  private static NType ntype = NType.Singleton;
+  private static NPokemon npokemon = NPokemon.Singleton;
   private static NUser nuser = new NUser();
   private static NEquipe nequipe = new NEquipe();
 
