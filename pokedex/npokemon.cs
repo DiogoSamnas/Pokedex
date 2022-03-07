@@ -1,10 +1,55 @@
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
 
 class NPokemon{
+  private NPokemon() { }
+  static NPokemon obj = new NPokemon();
+  public static NPokemon Singleton{get => obj;}
+  
   private Pokemon[] pokemons = new Pokemon[10];
   private int np;
 
+  
+  public void Abrir(){
+    Arquivo<Pokemon[]> f = new Arquivo<Pokemon[]>();
+    pokemons = f.Abrir("./pokemons.xml");
+    np = pokemons.Length;
+    AtualizarPokemon();
+    
+    // XmlSerializer xml = new XmlSerializer(typeof(Pokemon[])); 
+    // StreamReader f = new StreamReader("./pokemons.xml",Encoding.Default);
+    // pokemons = (Pokemon[]) xml.Deserialize(f);
+    // f.Close();
+    // np = pokemons.Length;
+    // AtualizarPokemon();
+  }
+  private void AtualizarPokemon(){
+    // percorrer vetor de pokemons para atualizar a categoria do pokemon
+    for(int i = 0; i < np; i++){
+      //Cada pokemon no vetor 
+      Pokemon p = pokemons[i];
+      // Recuperar o tipo do pokemon
+      Type t = NType.Singleton.Listar(p.TypeId);
+      // Associaçäo entre tipo e pokemon
+      if(t != null){
+        p.SetType(t);
+        t.PokemonInserir(p);
+      }
+    }
+  }
 
+  public void Salvar(){
+    Arquivo<Pokemon[]> f = new Arquivo<Pokemon[]>();
+    f.Salvar("./pokemons.xml",Listar());
+    
+    // XmlSerializer xml = new XmlSerializer(typeof(Pokemon[])); 
+    // StreamWriter f = new StreamWriter("./pokemons.xml",false,Encoding.Default);
+    // xml.Serialize(f, Listar());
+    // f.Close();
+  }
+  
   public Pokemon[] Listar(){
     Pokemon[] p = new Pokemon[np];
     Array.Copy(pokemons, p, np);

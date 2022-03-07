@@ -1,10 +1,15 @@
 using System;
 
-class Type{
+public class Type{
   private int id;
   private string description;
   private Pokemon[] pokemons = new Pokemon[1];
   private int np;
+
+  // Propriedades e construtor necessários para serialização
+  public int Id {get => id;set => id = value;}
+  public string Description {get => description;set => description = value;}
+  public Type(){ }
 
   public Type(int id, string description){
     this.id = id;

@@ -2,8 +2,22 @@ using System;
 using System.Collections.Generic;
 
 class NUser{
+  private NUser() { }
+  static NUser obj = new NUser();
+  public static NUser Singleton{get => obj;}
+
+  
   private List<User> users = new List<User>();
 
+  public void Abrir(){
+    Arquivo<List<User>> f = new Arquivo<List<User>>();
+    users = f.Abrir("./users.xml");
+  }
+  public void Salvar(){
+    Arquivo<List<User>> f = new Arquivo<List<User>>();
+    f.Salvar("./users.xml",Listar());
+  }
+  
   public List<User> Listar(){
     // Retorna uma lista com os usuarios cadastrados 
     users.Sort();

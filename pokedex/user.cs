@@ -1,6 +1,6 @@
 using System;
 
-class User : IComparable<User>{
+public class User : IComparable<User>{
   // Propriedades do usuário
   public int Id {get;set;}
   public string Nome{get;set;}

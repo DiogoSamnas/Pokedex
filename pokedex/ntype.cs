@@ -1,9 +1,35 @@
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
 
 class NType{
+  private NType() { }
+  static NType obj = new NType();
+  public static NType Singleton{get => obj;}
+  
   private Type[] types = new Type[10];
   private int nt;
 
+  public void Abrir(){
+    Arquivo<Type[]> f = new Arquivo<Type[]>();
+    types = f.Abrir("./types.xml");
+    nt = types.Length;
+    
+    // XmlSerializer xml = new XmlSerializer(typeof(Type[])); 
+    // StreamReader f = new StreamReader("./types.xml",Encoding.Default);
+    // types = (Type[]) xml.Deserialize(f);
+    // f.Close();
+  }
+  public void Salvar(){
+    Arquivo<Type[]> f = new Arquivo<Type[]>();
+    f.Salvar("./types.xml",Listar());
+    
+    // XmlSerializer xml = new XmlSerializer(typeof(Type[])); 
+    // StreamWriter f = new StreamWriter("./types.xml",false,Encoding.Default);
+    // xml.Serialize(f, Listar());
+    // f.Close();
+  }
 
   public Type[] Listar(){
     Type[] t = new Type[nt];
