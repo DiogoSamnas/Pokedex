@@ -5,7 +5,7 @@ class MainClass{
   private static NType ntype = NType.Singleton;
   private static NPokemon npokemon = NPokemon.Singleton;
   private static NUser nuser = NUser.Singleton;
-  private static NEquipe nequipe = new NEquipe();
+  private static NEquipe nequipe = NEquipe.Singleton;
 
   private static User userLogin = null;
   private static Equipe userEquipe = null;
@@ -16,6 +16,7 @@ class MainClass{
       ntype.Abrir();
       npokemon.Abrir();
       nuser.Abrir();
+      nequipe.Abrir();
     }
     catch(Exception erro){
       Console.WriteLine(erro.Message);
@@ -84,6 +85,7 @@ class MainClass{
       ntype.Salvar();
       npokemon.Salvar();
       nuser.Salvar();
+      nequipe.Salvar();
     }
     catch(Exception erro){
       Console.WriteLine(erro.Message);

@@ -2,7 +2,42 @@ using System;
 using System.Collections.Generic;
 
 class NEquipe{
+  private NEquipe() { }
+  static NEquipe obj = new NEquipe();
+  public static NEquipe Singleton{get => obj;}
+  
   private List<Equipe> equipes = new List<Equipe>();
+
+  public void Abrir(){
+    Arquivo<List<Equipe>> f = new Arquivo<List<Equipe>>();
+    equipes = f.Abrir("./equipes.xml");
+    //Atualizar dados dos usuários
+    AtualizarUser();
+    //Atualizar dados dos pokemons
+    AtualizarPokemon();
+  }
+  public void Salvar(){
+    Arquivo<List<Equipe>> f = new Arquivo<List<Equipe>>();
+    f.Salvar("./equipes.xml",Listar());
+  }
+
+  public void AtualizarUser(){
+    // Percorrer a lista de usuários
+    foreach(Equipe e in equipes){
+      User u = NUser.Singleton.Listar(e.UserId);
+      if(u != null) e.SetUser(u);
+    }
+  }
+
+  public void AtualizarPokemon(){
+    // Percorrer a lista de equipes
+    foreach(Equipe e in equipes){
+      foreach(EquipePokemon eq in e.EquipePokemonListar()){
+        Pokemon p = NPokemon.Singleton.Listar(eq.PokemonId);
+        if(p != null) eq.SetPokemon(p);
+      }
+    }
+  }
 
   // Operações
   public List<Equipe> Listar(){

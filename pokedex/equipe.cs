@@ -1,21 +1,32 @@
 using System;
 using System.Collections.Generic;
 
-class Equipe{
+public class Equipe{
   //Atributos da Equipe
   private int id;
   private string nome;
   private bool salvo;
-  // private string nome;
+  
   //Associação entre Equipe e User
   private User user;
+  private int userId;
+  
   //Associação entre Equipe e EquipePokemon
   private List<EquipePokemon> pokemons = new List<EquipePokemon>();
 
+  //Propriedades da equipe
+  public int Id {get => id; set => id = value;}
+  public string Nome {get => nome; set => nome = value;}
+  public bool Salvo {get => salvo; set => salvo = value;}
+  public int UserId {get => userId; set => userId = value;}
+  public List<EquipePokemon> Pokemons {get => pokemons; set => pokemons = value;}
+  public Equipe(){}
+  
   public Equipe(string nome, User user){
     this.user = user;
     this.nome = nome;
     this.salvo = true;
+    this.userId = user.Id;
   }
 
   public void SetId(int id){
@@ -29,6 +40,7 @@ class Equipe{
   }
   public void SetUser(User user){
     this.user = user;
+    this.userId = user.Id;
   }
 
   public int GetId(){
