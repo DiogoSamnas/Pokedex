@@ -2,6 +2,7 @@ using System;
 using System.Xml.Serialization;
 using System.Text;
 using System.IO;
+using System.Linq;
 
 class NType{
   private NType() { }
@@ -32,16 +33,20 @@ class NType{
   }
 
   public Type[] Listar(){
-    Type[] t = new Type[nt];
-    Array.Copy(types, t, nt);
-    return t;
+    // Type[] t = new Type[nt];
+    // Array.Copy(types, t, nt);
+    // t.OrderBy(obj => obj.GetDescription());
+    return types.Take(nt).OrderBy(obj => obj.GetId()).ToArray();
   }
 
   public Type Listar(int id){
-    for(int i = 0; i < nt; i++){
-      if(types[i].GetId() == id) return types[i];
-    }
-    return null;
+    // for(int i = 0; i < nt; i++){
+    //   if(types[i].GetId() == id) return types[i];
+    // }
+    // return null;
+    // var r = types.Where(obj => obj.GetId() == id); 
+    // return r.Count() == 0 ? null : r.First();
+    return types.FirstOrDefault(obj => obj.GetId() == id);
   }
 
   public void Inserir(Type t){

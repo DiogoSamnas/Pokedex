@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class MainClass{
   private static NType ntype = NType.Singleton;

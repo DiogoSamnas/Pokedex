@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class NEquipe{
   private NEquipe() { }
@@ -47,10 +48,11 @@ class NEquipe{
 
   public List<Equipe> Listar(User u){
     // Retorna uma lista com as equipes cadastradas do usuário u
-    List<Equipe> es = new List<Equipe>();
-    foreach(Equipe e in equipes)
-      if(e.GetUser() == u) es.Add(e);
-    return es;
+    // List<Equipe> es = new List<Equipe>();
+    // foreach(Equipe e in equipes)
+    //   if(e.GetUser() == u) es.Add(e);
+    // return es;
+    return equipes.Where(obj => obj.GetUser() == u).ToList();
   }
 
   public Equipe ListarEquipe(User u){
@@ -63,13 +65,15 @@ class NEquipe{
   public void Inserir(Equipe e, bool salvo){
     //gerar o id da equipe
     int max = 0;
-    foreach(Equipe obj in equipes)
-      if(obj.GetId() > max) max = obj.GetId();
+    // foreach(Equipe obj in equipes)
+    //   if(obj.GetId() > max) max = obj.GetId();
+    max = equipes.Max(obj => obj.GetId());
     e.SetId(max + 1);
     // Inserir equipe na lista de equipes
     equipes.Add(e);
     // Define o atributo salvo
     e.SetSalvo(salvo);
+
   }
 
   public List<EquipePokemon> EquipePokemonListar(Equipe e){
