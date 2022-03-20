@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPokemon xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Pokemon>
+    <Id>1</Id>
+    <Name>Bulbasaur</Name>
+    <Heigth>0.7</Heigth>
+    <Weigth>6.9</Weigth>
+    <Hp>45</Hp>
+    <Attack>49</Attack>
+    <Defense>49</Defense>
+    <SpAttack>65</SpAttack>
+    <SpDefense>65</SpDefense>
+    <Speed>45</Speed>
+    <TypeId>1</TypeId>
+  </Pokemon>
+</ArrayOfPokemon>

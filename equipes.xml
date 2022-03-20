@@ -22,8 +22,50 @@
     </Pokemons>
   </Equipe>
   <Equipe>
-    <Id>2</Id>
+    <Id>3</Id>
     <Nome>New Team</Nome>
+    <Salvo>false</Salvo>
+    <UserId>1</UserId>
+    <Pokemons>
+      <EquipePokemon>
+        <Id>1</Id>
+        <Name>Bulbasaur</Name>
+        <Heigth>0.7</Heigth>
+        <Weigth>6.9</Weigth>
+        <Hp>45</Hp>
+        <Attack>49</Attack>
+        <Defense>49</Defense>
+        <SpAttack>65</SpAttack>
+        <SpDefense>49</SpDefense>
+        <Speed>45</Speed>
+        <PokemonId>1</PokemonId>
+      </EquipePokemon>
+    </Pokemons>
+  </Equipe>
+  <Equipe>
+    <Id>3</Id>
+    <Nome>New Team</Nome>
+    <Salvo>false</Salvo>
+    <UserId>1</UserId>
+    <Pokemons>
+      <EquipePokemon>
+        <Id>1</Id>
+        <Name>Bulbasaur</Name>
+        <Heigth>0.7</Heigth>
+        <Weigth>6.9</Weigth>
+        <Hp>45</Hp>
+        <Attack>49</Attack>
+        <Defense>49</Defense>
+        <SpAttack>65</SpAttack>
+        <SpDefense>49</SpDefense>
+        <Speed>45</Speed>
+        <PokemonId>1</PokemonId>
+      </EquipePokemon>
+    </Pokemons>
+  </Equipe>
+  <Equipe>
+    <Id>4</Id>
+    <Nome>Dream Team</Nome>
     <Salvo>true</Salvo>
     <UserId>1</UserId>
     <Pokemons>
